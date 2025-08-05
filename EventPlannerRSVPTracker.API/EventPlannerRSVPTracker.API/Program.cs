@@ -1,5 +1,7 @@
 
 
+using EventPlannerRSVPTracker.Database;
+using EventPlannerRSVPTracker.Database.DbContext;
 using Serilog;
 
 try
@@ -15,6 +17,11 @@ try
         .Enrich.FromLogContext()
         .WriteTo.Console());
 
+    // Configure EF Core
+    builder.Services
+        .AddDbContext(builder.Configuration.GetConnectionString("DefaultConnection")!)
+        .AddRepositories();
+
     builder.Services.AddControllers();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
@@ -27,6 +34,13 @@ try
 
     if (app.Environment.IsDevelopment())
     {
+        using var scope = app.Services.CreateScope();
+
+        var appDbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+
+        Seeder.SeedData(appDbContext, logger);
+
         app.UseSwagger();
         app.UseSwaggerUI();
     }

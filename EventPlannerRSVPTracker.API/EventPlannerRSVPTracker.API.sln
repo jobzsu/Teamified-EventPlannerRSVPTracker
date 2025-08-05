@@ -5,6 +5,12 @@ VisualStudioVersion = 17.14.36202.13 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventPlannerRSVPTracker.API", "EventPlannerRSVPTracker.API\EventPlannerRSVPTracker.API.csproj", "{1BA59A5E-A56E-4697-985F-21270E763BD3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventPlannerRSVPTracker.Domain", "EventPlannerRSVPTracker.Domain\EventPlannerRSVPTracker.Domain.csproj", "{2DA3A3AA-C22F-4962-A5ED-F8FDDB1E683F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventPlannerRSVPTracker.Database", "EventPlannerRSVPTracker.Database\EventPlannerRSVPTracker.Database.csproj", "{DB34F919-56AC-4589-9D5D-BF13FB48839F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventPlannerRSVPTracker.App", "EventPlannerRSVPTracker.App\EventPlannerRSVPTracker.App.csproj", "{FC0C83F6-ECD4-49F6-82C0-36FF15C53EAC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{1BA59A5E-A56E-4697-985F-21270E763BD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BA59A5E-A56E-4697-985F-21270E763BD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BA59A5E-A56E-4697-985F-21270E763BD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DA3A3AA-C22F-4962-A5ED-F8FDDB1E683F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DA3A3AA-C22F-4962-A5ED-F8FDDB1E683F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DA3A3AA-C22F-4962-A5ED-F8FDDB1E683F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DA3A3AA-C22F-4962-A5ED-F8FDDB1E683F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB34F919-56AC-4589-9D5D-BF13FB48839F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB34F919-56AC-4589-9D5D-BF13FB48839F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB34F919-56AC-4589-9D5D-BF13FB48839F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB34F919-56AC-4589-9D5D-BF13FB48839F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC0C83F6-ECD4-49F6-82C0-36FF15C53EAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC0C83F6-ECD4-49F6-82C0-36FF15C53EAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC0C83F6-ECD4-49F6-82C0-36FF15C53EAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC0C83F6-ECD4-49F6-82C0-36FF15C53EAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
