@@ -34,6 +34,32 @@ try
 
     builder.Services.AddProblemDetails();
 
+    // Configure the CORS policy.
+    builder.Services.AddCors(options =>
+    {
+        // Define a new policy with the name we specified above.
+        options.AddPolicy(name: "defaultCORSPolicy",
+                          policy =>
+                          {
+                              // IMPORTANT: Use WithOrigins() to specify the allowed frontend URLs.
+                              // These must EXACTLY match the URL(s) where your React app is running,
+                              // including protocol (http/https) and port.
+                              policy.WithOrigins("http://localhost:5173",    // Common for Vite development
+                                                 "https://localhost:5173",   // Common for Vite development with HTTPS
+                                                 "http://localhost:3000",    // Common for Create React App development
+                                                 "https://localhost:3000")   // Common for Create React App with HTTPS
+                                                                             // Allow all HTTP methods (GET, POST, PUT, DELETE, etc.).
+                                    .AllowAnyMethod()
+                                    // Allow all headers to be sent by the client.
+                                    .AllowAnyHeader()
+                                    // IMPORTANT: Allow credentials (like cookies or authorization headers).
+                                    // This is crucial if your frontend sends authentication tokens (e.g., JWT in Authorization header)
+                                    // or relies on cookies for session management.
+                                    // Note: WithAllowCredentials() means you CANNOT use AllowAnyOrigin() ("*").
+                                    .AllowCredentials();
+                          });
+    });
+
     var app = builder.Build();
 
     // Use exception handler
@@ -56,6 +82,8 @@ try
     }
 
     app.UseHttpsRedirection();
+
+    app.UseCors("defaultCORSPolicy"); // Apply the CORS policy
 
     app.UseAuthorization();
 

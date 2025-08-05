@@ -45,6 +45,7 @@ public static class DatabaseStartupSetup
         ArgumentNullException.ThrowIfNull(services, nameof(services));
 
         services.AddScoped<IEventsService, EventsService>();
+        services.AddScoped<IUsersService, UsersService>();
 
         return services;
     }
