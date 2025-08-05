@@ -15,4 +15,6 @@ public interface IEventsService
     Task<ResultModel<bool>> DeleteEvent(Guid eventId, CancellationToken cancellationToken = default);
 
     Task<ResultModel<bool>> RSVPToEvent(Guid eventId, CancellationToken cancellationToken = default);
+
+    Task<ResultModel<List<UserEventDTO>>> GetPublicEvents(CancellationToken cancellationToken = default);
 }

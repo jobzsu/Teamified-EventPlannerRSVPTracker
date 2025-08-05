@@ -26,6 +26,16 @@ public class EventRepository : BaseRepository<Event>, IEventRepository
                     .FirstOrDefaultAsync(e => e.Id == eventId, cancellationToken);
     }
 
+    public async Task<List<Event>?> GetPublicEvents(CancellationToken cancellationToken = default, bool shouldTrack = false)
+    {
+        return shouldTrack ?
+            await GetAll()
+                    .ToListAsync(cancellationToken) :
+            await GetAll()
+                    .AsNoTracking()
+                    .ToListAsync(cancellationToken);
+    }
+
     public async Task<List<Event>?> GetUserEvents(string username, CancellationToken cancellationToken = default, bool shouldTrack = false)
     {
         return shouldTrack ?

@@ -133,4 +133,24 @@ public class EventsController : ControllerBase
             return Ok(jsonResponse);
         }
     }
+
+    [HttpGet]
+    [Route("Public")]
+    public async Task<IActionResult> GetPublicEvents(CancellationToken cancellationToken = default)
+    {
+        var result = await _eventsService.GetPublicEvents(cancellationToken);
+
+        if (result.IsSuccess)
+        {
+            var jsonResponse = JsonResponse.Success("Public events retrieved successfully", result.Data);
+
+            return Ok(jsonResponse);
+        }
+        else
+        {
+            var jsonResponse = JsonResponse.Fail(result.ErrorDetails![0], result.ErrorDetails![0].Message);
+
+            return Ok(jsonResponse);
+        }
+    }
 }

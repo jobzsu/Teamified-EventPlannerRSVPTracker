@@ -208,6 +208,47 @@ public class EventsService : IEventsService
         }
     }
 
+    public async Task<ResultModel<List<UserEventDTO>>> GetPublicEvents(CancellationToken cancellationToken = default)
+    {
+        List<ErrorModel> errors = new();
+
+        try
+        {
+            var publicEvents = await _eventRepository.GetPublicEvents(cancellationToken);
+
+            var retVal = new List<UserEventDTO>();
+
+            if(publicEvents is not null && publicEvents.Any())
+            {
+                retVal.AddRange(publicEvents.Select(e =>
+                {
+                    return new UserEventDTO()
+                    {
+                        Id = e.Id,
+                        Name = e.Name,
+                        Date = e.Date.ToString("MM/dd/yyyy"),
+                        Time = e.Time.ToString(),
+                        Location = e.Location,
+                        ReservedPax = e.ReservedPax,
+                        MaxPax = e.MaxPax
+                    };
+                }));
+            }
+
+            return ResultModel<List<UserEventDTO>>.Success(retVal);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error retrieving Public Events");
+
+            ErrorModel error = new(nameof(Exception), "Error retrieving Public Events");
+
+            errors.Add(error);
+
+            return ResultModel<List<UserEventDTO>>.Fail(errors);
+        }
+    }
+
     public async Task<ResultModel<List<UserEventDTO>>> GetUserEvents(string username, CancellationToken cancellationToken = default)
     {
         List<ErrorModel> errors = new();

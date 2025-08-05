@@ -79,11 +79,13 @@ const UserEvents = () => {
   }, []);
 
   const handleCreateNewEvent = () => {
-    console.log('Navigate to Create New Event page');
+		if(isLoading) return;
+    navigate('/create-event');
   };
 
   const handleEditEvent = (eventId) => {
-    console.log(`Edit event with ID: ${eventId}`);
+		if(isLoading) return;
+		navigate(`/edit-event/${eventId}`);
   };
 
   const handleDeleteEvent = async (eventId) => {
@@ -113,7 +115,8 @@ const UserEvents = () => {
   };
 
   const handleGoToPublicEvents = () => {
-    console.log('Navigate to Public Events Page');
+		if(isLoading) return;
+    navigate('/public-events');
   };
 
   if (isLoading) {
