@@ -1,5 +1,6 @@
 
 
+using EventPlannerRSVPTracker.API.Middlewares;
 using EventPlannerRSVPTracker.Database;
 using EventPlannerRSVPTracker.Database.DbContext;
 using Serilog;
@@ -26,6 +27,11 @@ try
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
+
+    // Configure global exception handling middleware
+    builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+
+    builder.Services.AddProblemDetails();
 
     var app = builder.Build();
 
