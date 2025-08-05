@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
+﻿using EventPlannerRSVPTracker.App.DTOs;
+using Microsoft.AspNetCore.Diagnostics;
 
 namespace EventPlannerRSVPTracker.API.Middlewares;
 
@@ -20,17 +20,16 @@ public class GlobalExceptionHandler : IExceptionHandler
             "An unhandled exception occurred: {ErrorMessage}",
             exception.Message);
 
-        var problemDetails = new ProblemDetails
+        var errors = new List<ErrorModel>()
         {
-            Status = StatusCodes.Status500InternalServerError,
-            Title = "An error occurred while processing your request.",
-            Detail = "An unexpected error occurred. Please try again later.",
-            Instance = httpContext.Request.Path
+            new ErrorModel("InternalServerError", "Internal Server Error")
         };
+
+        var jsonResponse = JsonResponse.Fail(errors, "An error occurred while processing your request.", 500);
 
         httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
 
-        await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
+        await httpContext.Response.WriteAsJsonAsync(jsonResponse, cancellationToken);
 
         return true;
     }

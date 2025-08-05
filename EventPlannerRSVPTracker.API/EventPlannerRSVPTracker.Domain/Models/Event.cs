@@ -16,6 +16,8 @@ public class Event
 
     public string? Description { get; set; }
 
+    public int ReservedPax { get; set; }
+
     public int MaxPax { get; set; }
 
     public Guid CreatedByUserId { get; set; }
@@ -42,10 +44,28 @@ public class Event
             Time = time,
             Location = location,
             Description = description,
+            ReservedPax = 0,
             MaxPax = maxPax,
             CreatedByUserId = createdByUserId,
             DateAdded = DateOnly.FromDateTime(DateTime.UtcNow),
             RowVersion = Array.Empty<byte>()
         };
+    }
+
+    public void Update(string name,
+        DateOnly date,
+        TimeOnly time,
+        string location,
+        string? description,
+        int reservedPax,
+        int maxPax)
+    {
+        Name = name;
+        Date = date;
+        Time = time;
+        Location = location;
+        Description = description;
+        ReservedPax = reservedPax;
+        MaxPax = maxPax;
     }
 }

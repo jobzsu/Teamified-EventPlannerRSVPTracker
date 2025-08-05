@@ -18,10 +18,11 @@ try
         .Enrich.FromLogContext()
         .WriteTo.Console());
 
-    // Configure EF Core
+    // Configure DbContext, EF Core, Repositories and Services
     builder.Services
         .AddDbContext(builder.Configuration.GetConnectionString("DefaultConnection")!)
-        .AddRepositories();
+        .AddRepositories()
+        .AddServices();
 
     builder.Services.AddControllers();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -34,6 +35,9 @@ try
     builder.Services.AddProblemDetails();
 
     var app = builder.Build();
+
+    // Use exception handler
+    app.UseExceptionHandler();
 
     // Configure the HTTP request pipeline.
     app.UseSerilogRequestLogging();

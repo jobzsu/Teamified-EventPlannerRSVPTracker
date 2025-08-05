@@ -1,8 +1,10 @@
 ﻿using EventPlannerRSVPTracker.App.Abstractions.Persistence;
 using EventPlannerRSVPTracker.App.Abstractions.Repositories;
+using EventPlannerRSVPTracker.App.Abstractions.Services;
 using EventPlannerRSVPTracker.Database.DbContext;
 using EventPlannerRSVPTracker.Database.Persistence;
 using EventPlannerRSVPTracker.Database.Repositories;
+using EventPlannerRSVPTracker.Database.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,6 +36,15 @@ public static class DatabaseStartupSetup
         services.AddScoped<IEventRepository, EventRepository>();
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+        return services;
+    }
+
+    public static IServiceCollection AddServices(this IServiceCollection services)
+    {
+        ArgumentNullException.ThrowIfNull(services, nameof(services));
+
+        services.AddScoped<IEventsService, EventsService>();
 
         return services;
     }
